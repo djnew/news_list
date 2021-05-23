@@ -33,6 +33,9 @@ class NewsSectionService
      */
     public function get(array $filter, array $paginate = [], array $sort = [])
     {
+        if(empty($sort)){
+            $sort = ['active_from' => 'DESC'];
+        }
         return $this->newsSectionRepository->get($filter, $paginate, $sort);
     }
 
@@ -68,7 +71,7 @@ class NewsSectionService
         $model              = $model ?? $this->newsSection;
         $model->name        = $params->get('name');
         $model->active_from = Carbon::now();
-        $model->code        = Str::slug($params->get('code'));
+        $model->code        = Str::slug($params->get('name'));
 
         return $model;
     }
