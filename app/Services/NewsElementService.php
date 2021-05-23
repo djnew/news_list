@@ -58,8 +58,8 @@ class NewsElementService
     {
         $params = Collection::wrap($params);
 
-        /** @var NewsSection $model */
-        $model              = $model ?? $this->newsSection;
+        /** @var NewsElement $model */
+        $model              = $model ?? $this->newsElement;
         $model->name        = $params->get('name');
         $model->active_from = Carbon::now();
         $model->code        = Str::slug($params->get('code'));

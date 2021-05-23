@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\NewsElementController;
 use App\Http\Controllers\NewsSectionController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -33,6 +34,6 @@ Route::group([
     'prefix'    => '/element',
     'as'        => 'element',
 ], function () {
-    Route::get('/index', [NewsSectionController::class, 'index'])->name('index');
-    Route::get('/show', [NewsSectionController::class, 'show'])->name('show');
+    Route::get('/index', [NewsElementController::class, 'index'])->name('index');
+    Route::get('/show', [NewsElementController::class, 'show'])->name('show');
 });

@@ -8,6 +8,7 @@ use Illuminate\Support\Carbon;
 
 /**
  * Class NewsSection
+ *
  * @package App\Models
  * @property int    id
  * @property Carbon created_at
@@ -17,6 +18,7 @@ use Illuminate\Support\Carbon;
  * @property Carbon activeFrom
  * @property string name
  * @property string code
+ * @mixin IdeHelperNewsSection
  */
 class NewsSection extends Model
 {

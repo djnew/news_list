@@ -87,7 +87,12 @@ abstract class BaseQueryFilter implements iQueryFilter
 
             $paginateParams = $this->getPaginate();
 
-            return $this->builder->paginate($paginateParams['perPage'], ['*'], 'page', $paginateParams['page']);
+            return $this->builder->paginate(
+                $paginateParams['perPage'] ?? 10,
+                ['*'],
+                'page',
+                $paginateParams['page'] ?? 1
+            );
 
         } else {
             return $this->builder->get();
@@ -128,9 +133,6 @@ abstract class BaseQueryFilter implements iQueryFilter
      */
     private function isPaginate() : bool
     {
-        if (empty($this->getPaginate())) {
-            return false;
-        }
 
         return true;
     }

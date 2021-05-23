@@ -1,14 +1,51 @@
 version: '3'
 services:
+  redis_news:
+    image: 'redis:5.0.7-alpine'
+    ports:
+      - '6379:6379'
+    networks:
+      - news-list
+  php74_news:
+    build:
+      context: .
+      dockerfile: ./.docker/php/Dockerfile
+    volumes:
+      - '.:/var/www'
+    user: '1000:1000'
+    ports:
+      - '1000:9000'
+    entrypoint: ./.docker/php/php-entrypoint.sh
+    links:
+      - redis_news
+      - pgdb_news_list
+    networks:
+      - news-list
+  web_news:
+    build:
+      context: .
+      dockerfile: ./.docker/nginx/Dockerfile
+    ports:
+      - '8080:8080'
+      - '443:1443'
+    user: '1000:1000'
+    volumes:
+      - '.:/var/www'
+    links:
+      - php74_news
+      - pgdb_news_list
+    restart: always
+    networks:
+      - news-list
   pgdb_news_list:
     image: 'postgres:alpine'
     ports:
       - '5432:5432'
     restart: unless-stopped
     environment:
-      - POSTGRES_PASSWORD='${DB_PASSWORD}'
-      - POSTGRES_USER='${DB_USERNAME}'
-      - POSTGRES_DB='${DB_DATABASE}'
+      - 'POSTGRES_PASSWORD=${DB_PASSWORD}'
+      - 'POSTGRES_USER=${DB_USERNAME}'
+      - 'POSTGRES_DB=${DB_DATABASE}'
     volumes:
       - 'newslistdata:/var/lib/postgresql'
     networks:
