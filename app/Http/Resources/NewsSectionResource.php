@@ -20,9 +20,10 @@ class NewsSectionResource extends JsonResource
         $model = $this;
 
         return [
+            'id'         => $model->id,
             'activeFrom' => $model->getActiveFrom()->format('d.m.Y H:i'),
-            'name' => $model->getName(),
-            'code' => $model->getCode()
+            'name'       => $model->getName(),
+            'code'       => $model->getCode(),
         ];
     }
 }

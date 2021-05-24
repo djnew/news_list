@@ -85,11 +85,11 @@ class NewsElement extends Model
         static::addGlobalScope('activeAndPublish', function (Builder $builder) {
             $builder
                 ->where('state', '=', 1)
-                ->where('active_from', '>=', Carbon::now())
+                ->where('active_from', '<=', Carbon::now())
                 ->whereHas('section', function (Builder $query) {
                     $query->with('section')
                         ->where('state', '=', 1)
-                        ->where('active_from', '>=', Carbon::now());
+                        ->where('active_from', '<=', Carbon::now());
                 });
 
         });

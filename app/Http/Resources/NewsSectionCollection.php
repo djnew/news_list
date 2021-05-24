@@ -18,11 +18,10 @@ class NewsSectionCollection extends ResourceCollection
      *
      * @return array
      */
-    public function toArray($request)
+    public function toArray($request) : array
     {
         return [
-            'data'    => $this->collection,
-            'success' => true,
+            'sections'    => $this->collection,
         ];
     }
 }
