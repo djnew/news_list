@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\NewsSectionController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -17,6 +18,7 @@ use Illuminate\Support\Facades\Route;
 Route::any('/', function () {
     return  redirect('/news');
 });
+Route::any('/news', [NewsSectionController::class, 'index'])->name("sections");
 
 Auth::routes();
 

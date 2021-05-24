@@ -36,7 +36,7 @@ class EloquentNewsSectionRepository {
             ->setFilters($filter)
             ->setPaginate($paginate)
             ->setSort($sort)
-            ->apply($this->model::query())
+            ->apply($this->model::query()->withCount('newsElement'))
             ->getResult();
     }
 
