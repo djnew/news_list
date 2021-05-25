@@ -28,7 +28,7 @@ abstract class BaseQueryFilter implements iQueryFilter
      */
     protected $filters = null;
     /**
-     * @var array
+     * @var int
      */
     protected $paginate = null;
     /**
@@ -88,10 +88,10 @@ abstract class BaseQueryFilter implements iQueryFilter
             $paginateParams = $this->getPaginate();
 
             return $this->builder->paginate(
-                $paginateParams['perPage'] ?? 10,
+                10,
                 ['*'],
                 'page',
-                $paginateParams['page'] ?? 1
+                $paginateParams?? 1
             );
 
         } else {
@@ -180,19 +180,19 @@ abstract class BaseQueryFilter implements iQueryFilter
 
 
     /**
-     * @return array
+     * @return int
      */
-    private function getPaginate() : ?array
+    private function getPaginate() : int
     {
-        return array_filter($this->paginate ?? $this->request->get('paginate', []));
+        return $this->paginate ?? $this->request->get('page', 1);
     }
 
     /**
-     * @param array $paginate
+     * @param int $paginate
      *
      * @return BaseQueryFilter
      */
-    public function setPaginate(array $paginate) : iQueryFilter
+    public function setPaginate(int $paginate) : iQueryFilter
     {
         $this->paginate = $paginate;
 

@@ -22,7 +22,6 @@ class NewsElementCollection extends ResourceCollection
     {
         return [
             'data'    => $this->collection,
-            'success' => true,
         ];
     }
 }

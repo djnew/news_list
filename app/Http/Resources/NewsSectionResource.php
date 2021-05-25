@@ -24,6 +24,7 @@ class NewsSectionResource extends JsonResource
             'activeFrom' => $model->getActiveFrom()->format('d.m.Y H:i'),
             'name'       => $model->getName(),
             'code'       => $model->getCode(),
+            'news_element_count' => $model->getNewsElementCount()
         ];
     }
 }

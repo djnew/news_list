@@ -19,6 +19,7 @@ Route::any('/', function () {
     return  redirect('/news');
 });
 Route::any('/news', [NewsSectionController::class, 'index'])->name("sections");
+Route::any('/news/{section}', [NewsSectionController::class, 'section'])->name("section");
 
 Auth::routes();
 

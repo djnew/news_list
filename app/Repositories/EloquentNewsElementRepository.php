@@ -32,13 +32,13 @@ class EloquentNewsElementRepository
 
     /**
      * @param  array  $filter  - фильтр
-     * @param  array  $paginate  - постраничная навигация
+     * @param  int  $paginate  - постраничная навигация
      * @param  array  $sort  - сортировка
      *
      * @return LengthAwarePaginator|Collection|iterable
      * @throws QueryFilterException
      */
-    public function get(array $filter, array $paginate, array $sort)
+    public function get(array $filter, int $paginate, array $sort)
     {
         return $this->queryFilter
             ->setFilters($filter)

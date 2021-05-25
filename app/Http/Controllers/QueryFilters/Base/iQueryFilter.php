@@ -36,11 +36,11 @@ interface iQueryFilter
     public function setFilters(array $filters) : iQueryFilter;
 
     /**
-     * @param array $paginate
+     * @param int $paginate
      *
      * @return BaseQueryFilter
      */
-    public function setPaginate(array $paginate) : iQueryFilter;
+    public function setPaginate(int $paginate) : iQueryFilter;
 
     /**
      * @param array $sort

@@ -33,7 +33,7 @@ class NewsElementService
      * @return LengthAwarePaginator|Collection|iterable
      * @throws QueryFilterException
      */
-    public function get(array $filter, array $paginate = [], array $sort = [])
+    public function get(array $filter, int $paginate = 1, array $sort = [])
     {
         return $this->newsElementRepository->get($filter, $paginate, $sort);
     }

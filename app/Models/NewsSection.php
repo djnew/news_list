@@ -82,5 +82,13 @@ class NewsSection extends Model
     {
         return $this->hasMany(NewsElement::class, 'news_section_id', 'id');
     }
+    public function getNewsElementCount(): int
+    {
+        return $this->newsElement->count();
+    }
 
+    public function getRouteKeyName() : string
+    {
+        return 'code';
+    }
 }

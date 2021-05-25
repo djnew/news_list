@@ -29,7 +29,7 @@ class NewsElementController extends Controller
     {
 
         $filter = $request->get('filter', []);
-        $paginate = $request->get('paginate', []);
+        $paginate = $request->get('page', 1);
         $sort = $request->get('sort', []);
 
         return new NewsElementCollection(

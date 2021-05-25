@@ -4,23 +4,27 @@
 namespace App\Http\Controllers;
 
 
+use App\Http\Resources\NewsElementCollection;
 use App\Http\Resources\NewsSectionCollection;
+use App\Http\Resources\NewsSectionElementsResource;
 use App\Models\NewsSection;
+use App\Services\NewsElementService;
 use App\Services\NewsSectionService;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
-use Illuminate\Http\Resources\Json\ResourceCollection;
 
 
 class NewsSectionController extends Controller
 {
     private NewsSectionService $newsSectionService;
+    private NewsElementService $newsElementService;
 
-    public function __construct(NewsSectionService $newsSectionService)
+    public function __construct(NewsSectionService $newsSectionService, NewsElementService $newsElementService)
     {
         $this->newsSectionService = $newsSectionService;
+        $this->newsElementService = $newsElementService;
     }
 
     /**
@@ -33,15 +37,41 @@ class NewsSectionController extends Controller
     {
 
         $filter   = $request->get('filter', []);
-        $paginate = $request->get('paginate', []);
+        $paginate = $request->get('page', 1);
         $sort     = $request->get('sort', []);
-        return view(
-            'home',
+        $sections = new NewsSectionCollection(
             $this->newsSectionService->get($filter, $paginate, $sort)
+        );
+
+        return view(
+            'sections',
+            [
+                "sectionsResource" => $sections->response($request)->getData(),
+            ]
         );
     }
 
-    public function section(NewsSection $newsSection){
-        
+    public function section(NewsSection $section, Request $request)
+    {
+        $filter   = $request->get('filter', [
+            'news_section_id' => $section['id'],
+        ]);
+        $paginate = $request->get('page', 1);
+        $sort     = $request->get('sort', []);
+
+        $elements = new NewsElementCollection(
+            $this->newsElementService->get($filter, $paginate, $sort)
+        );
+        if (!$section) {
+            abort(404);
+        }
+
+        return view(
+            'section',
+            [
+                'section'          => $section,
+                "elementsResource" => $elements->response([])->getData(),
+            ]
+        );
     }
 }

@@ -25,13 +25,13 @@ class NewsSectionService
 
     /**
      * @param array $filter
-     * @param array $paginate
+     * @param int $paginate
      * @param array $sort
      *
      * @return LengthAwarePaginator|Collection|iterable
      * @throws QueryFilterException
      */
-    public function get(array $filter, array $paginate = [], array $sort = [])
+    public function get(array $filter, int $paginate = 1, array $sort = [])
     {
         if(empty($sort)){
             $sort = ['active_from' => 'DESC'];

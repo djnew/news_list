@@ -22,4 +22,8 @@ class NewsElementQueryFilter extends BaseQueryFilter
     {
         $this->builder->where("CONCAT(`id`, `-`,`code`)", '=', $value);
     }
+    public function news_section_id($group, $field, $value)
+    {
+        $this->builder->where($group, '=', $value);
+    }
 }
