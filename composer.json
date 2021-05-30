@@ -15,11 +15,12 @@
         "laravelrus/sleepingowl": "dev-development"
     },
     "require-dev": {
-        "fakerphp/faker": "^1.14",
         "facade/ignition": "^2.5",
+        "fzaninotto/faker": "^1.9",
         "laravel/sail": "^1.0.1",
         "mockery/mockery": "^1.4.2",
         "nunomaduro/collision": "^5.0",
+        "pestphp/pest": "^1.3",
         "phpunit/phpunit": "^9.3.3"
     },
     "autoload": {

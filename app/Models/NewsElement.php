@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Base\iNews;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -22,7 +23,7 @@ use Illuminate\Support\Str;
  * @property int    show_count
  * @mixin IdeHelperNewsElement
  */
-class NewsElement extends Model
+class NewsElement extends Model implements iNews
 {
     use HasFactory;
 
@@ -36,11 +37,11 @@ class NewsElement extends Model
 
         static::addGlobalScope('activeAndPublish', function (Builder $builder) {
             $builder
-                ->where('state', '=', 1)
+                ->where('state', '=', iNews::ACTIVE)
                 ->where('active_from', '<=', Carbon::now())
                 ->whereHas('section', function (Builder $query) {
                     $query->with('section')
-                        ->where('state', '=', 1)
+                        ->where('state', '=', iNews::ACTIVE)
                         ->where('active_from', '<=', Carbon::now());
                 });
 

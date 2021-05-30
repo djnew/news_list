@@ -4,6 +4,7 @@ namespace Database\Factories;
 use App\Models\NewsSection;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Carbon;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Str;
 
 class NewsSectionFactory extends Factory
@@ -15,11 +16,7 @@ class NewsSectionFactory extends Factory
      */
     protected $model = NewsSection::class;
 
-    /**
-     * Define the model's default state.
-     *
-     * @return array
-     */
+
     public function definition(): array
     {
         $name = $this->faker->text(21);
